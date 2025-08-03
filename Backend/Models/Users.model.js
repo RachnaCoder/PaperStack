@@ -17,7 +17,7 @@ const userSchema = new userSchema({
 
     password:{
         type:String,
-        required:true,
+        required:[true, "password is required"]
     },
 
     uploadedPapers: [{
