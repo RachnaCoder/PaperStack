@@ -1,12 +1,18 @@
-import React from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Register from './Pages/Register.jsx';
+ import Login from './Pages/Login.jsx'; 
+// import Home from './Pages/Home';   // make this later
 
-const App = () => {
+function App() {
   return (
-    <div>
-<h1 class ="text-7xl   inline-flex hover:bg-sky-700  text-gray-500 font-bold bg-sky-500"> how are you</h1>
-
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Register />} />
+         <Route path="/login" element={<Login />} /> 
+        {/* <Route path="/" element={<Home />} /> */}
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

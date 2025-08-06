@@ -1,0 +1,73 @@
+import React, { useState } from "react"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
+
+
+export default function Login(){
+
+    const [form, setForm] = useState("")
+
+    const [error, setError] = useState("")
+
+const navigate = useNavigate();
+
+const handleChange=(e)=> setForm({...form, [e.target.name]:e.target.value})
+
+ const handleSubmit= async (e)=>{
+    e.preventDefault();
+    try{
+        //replace with real backend endpoint
+        await axios.post("http://localhost:5000/api/auth/login", form)
+        navigate("/Home")
+
+    }
+catch(err){
+setError(err.response?.data?.error || "Registration failed");
+}
+ }
+
+ return(
+
+<div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-purple-200">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">Login here</h2>
+        <form  onSubmit={handleSubmit}>
+          
+          <div className="mb-4">
+            <label className="block mb-1 text-gray-700 font-semibold">Email Address</label>
+            <input
+              type="email"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
+              placeholder="Email"
+              required
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-6">
+            <label className="block mb-1 text-gray-700 font-semibold">Password</label>
+            <input
+              type="password"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
+              placeholder=""
+              required
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition"
+          >
+            Login
+          </button>
+          
+        </form>
+      </div>
+    </div>
+
+ )
+
+}
