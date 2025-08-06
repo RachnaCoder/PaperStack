@@ -20,47 +20,7 @@ export default function Register() {
     }
   };
 
-  return (
-  //   <div className="register-page">
-  //     <h1>Register</h1>
-  //     {error && <p style={{color: "red"}}>{error}</p>}
-  //     <form onSubmit={handleSubmit}>
-  //       <input className=""
-  //         name="username"
-  //         required
-  //         placeholder="Username"
-  //         value={form.username}
-  //         onChange={handleChange}
-  //       /><br/>
-  //       <input
-  //         type="email"
-  //         name="email"
-  //         required
-  //         placeholder="Email"
-  //         value={form.email}
-  //         onChange={handleChange}
-  //       /><br/>
-  //       <input
-  //         type="password"
-  //         name="password"
-  //         required
-  //         placeholder="Password"
-  //         value={form.password}
-  //         onChange={handleChange}
-  //       /><br/>
-  //       <button type="submit">Register</button>
-  //     </form>
-  //     <p>
-  //       Already have an account? <a href="/login">Login here</a>
-  //     </p>
-  //   </div>
-  // );
-
-
-
-
-
-  
+  return(
 
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-purple-200">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
