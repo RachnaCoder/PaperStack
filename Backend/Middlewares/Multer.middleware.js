@@ -9,6 +9,8 @@ filename: function(req, file, cb ){
     cb(null, file.originalname)
 }
 
+});
+
 const fileFilter = (req, file, cb) => {
 
   if (
@@ -20,7 +22,8 @@ const fileFilter = (req, file, cb) => {
   } else {
     cb(new Error('Only PDF or image files (JPG/PNG) are allowed!'), false);
   }
-}
-})
-const upload = multer({ storage, fileFilter });
-module.exports = upload;
+};
+
+ export const upload = multer({ storage, fileFilter });
+
+

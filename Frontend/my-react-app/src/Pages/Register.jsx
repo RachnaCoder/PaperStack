@@ -20,8 +20,10 @@ export default function Register() {
     }
   };
 
-  return (
-    
+  
+  return(
+
+
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-purple-200">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">Create Account</h2>
