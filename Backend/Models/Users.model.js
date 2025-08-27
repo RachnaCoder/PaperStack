@@ -1,6 +1,7 @@
-import mongoose from mongoose
+import mongoose from "mongoose";
+import plm from "passport-local-mongoose";
 
-const userSchema = new userSchema({
+const userSchema = new mongoose.Schema({
 
     username : {
      type: String,
@@ -15,18 +16,21 @@ const userSchema = new userSchema({
      lowercase:true
     },
 
+
     password:{
         type:String,
         required:[true, "password is required"]
     },
 
     uploadedPapers: [{
-        type :mongoose.Schema.Types.ObjectId,
+        type : mongoose.Schema.Types.ObjectId,
          ref:'Paper',
     }],
 
 }, {timestamps:true}
 
 )
+
+userSchema.plugin(plm);
 
 export  const User = mongoose.model("User", userSchema)

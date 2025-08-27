@@ -1,6 +1,6 @@
 import mongoose from mongoose
 
-const paperSchema = new paperSchema(
+const paperSchema = new mongoose.Schema(
 {
 course:{
 type: String,

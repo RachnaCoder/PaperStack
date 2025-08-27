@@ -1,8 +1,8 @@
 import { asyncHandler } from "../Utils/AsyncHandler.js";
 import { ApiError } from "../Utils/ApiError.js";
 import {User} from "../Models/Users.model.js";
-import { uploadOnCloudinary } from "../Utils/Cloudinary.js";
 import { ApiResponse } from "../Utils/ApiResponse.js";
+import passport from "../Config/Passport.config.js";
 
 //////STEPS FOR REGISTERING THE USER TO KEEP IN MIND ////////
 
@@ -16,29 +16,32 @@ import { ApiResponse } from "../Utils/ApiResponse.js";
 // check for user creation
 // return response
 
-
+///////// REGISTERING THE USER//////////////////
 
 const registerUser = asyncHandler(async (req,res)=>{
     
 const {username, email, password} = req.body  
 console.log("email :", email);
-console.log("username :", username); // get user details from the frontend
+console.log("username :", username);
+console.log(req.body);
+ // get user details from the frontend
  
 if ([username, email, password].some((field) => 
 field?.trim() === "")     //some is a method like map
 )
+
 {
 throw new ApiError(400, "all fields are required");
 }
 //for checking that all fields are filled by  the user or for validation
-})
-
 
 // checking if user already exists or not
 
- const existedUser = User.findOne({
-    $or:[{username}, {email}]
-})
+ const existedUser = await User.findOne({
+    $or:[
+        {username: username},
+         { email:  email}]
+});
 
 if(existedUser){
     throw new ApiError(409, "user with username or email is already exists")
@@ -59,12 +62,83 @@ if(!createdUser){
 }
 // if not created then throw the error
 
-return res.status(201).json(
+return  res.status(201).json(
 new ApiResponse(200, createdUser, "user registerd successfully")
 )
+})
+
+
+///////////LOGIN USER CONTROLLER//////////////////
+// get user details from the frontend -- req.body
+// check that all fields are filled -  otherwise validation error
+// find the user in db
+//  check password with  stored password in database
+// if matched then send the user to  home page
+// if not matched then  send it to register page
+
+
+// const loginUser = asyncHandler(async(req, res, next) =>{
+// const {username, password, email} = req.body;
+// console.log(req.body);
+
+// if(!username){
+//    return  next (new ApiError(400, "username or email is required"));
+// }
+ 
+//  passport.authenticate('local', (err, user) => {
+//     if (err) 
+//         return next(new ApiError(400, "something went wrong"));
+
+//     if (!user) {
+//       return next(new ApiError(404, "invalid credentials"));
+//     }
+//     req.logIn(user, (err) => {
+//       if (err) 
+//        return next( new ApiError(500, "login failed"));
+//       return res.json({ success: true, message: "Login successful", user: { id: user._id, username: user.username } });
+//     });
+//   })(req, res, next);
+
+
+
+
+// });
 
 
 
 
 
-export {registerUser}
+ const loginUser = (req, res, next) => {
+
+const {username, password, email} = req.body;
+
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return next(err); // Error during authentication process
+    }
+    if (!user) {
+      // Authentication failed (wrong email or password)
+      return res.status(401).json({ message: info.message || 'Login failed' });
+    }
+    // Log the user in (establish session)
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      // Successful login: return user info or success message
+      return res.json({ message: 'Login successful', user: { id: user._id, email: user.email } });
+    });
+  })(req, res, next);
+};
+
+
+
+
+
+
+
+
+export {
+    registerUser,
+    loginUser
+}
