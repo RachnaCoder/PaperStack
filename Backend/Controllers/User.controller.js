@@ -3,6 +3,10 @@ import { ApiError } from "../Utils/ApiError.js";
 import {User} from "../Models/Users.model.js";
 import { ApiResponse } from "../Utils/ApiResponse.js";
 import passport from "../Config/Passport.config.js";
+import bcrypt from "bcrypt";
+  
+
+
 
 //////STEPS FOR REGISTERING THE USER TO KEEP IN MIND ////////
 
@@ -15,21 +19,17 @@ import passport from "../Config/Passport.config.js";
 // remove password and refresh token field from response
 // check for user creation
 // return response
-
 ///////// REGISTERING THE USER//////////////////
+
 
 const registerUser = asyncHandler(async (req,res)=>{
     
-const {username, email, password} = req.body  
-console.log("email :", email);
-console.log("username :", username);
+const {Fullname, email, password} = req.body  
 console.log(req.body);
  // get user details from the frontend
- 
-if ([username, email, password].some((field) => 
+if ([Fullname, email, password].some((field) => 
 field?.trim() === "")     //some is a method like map
 )
-
 {
 throw new ApiError(400, "all fields are required");
 }
@@ -39,20 +39,22 @@ throw new ApiError(400, "all fields are required");
 
  const existedUser = await User.findOne({
     $or:[
-        {username: username},
          { email:  email}]
 });
 
 if(existedUser){
     throw new ApiError(409, "user with username or email is already exists")
 }
+const SaltRounds = 5;
+
+const hashedPassword = await bcrypt.hash(password, SaltRounds);
 
 const user = await User.create({  // create a user in database 
-    username,
-    email,
-    password,
-    username : username.toLowerCase()
+    email : email,
+    password : hashedPassword,
+    Fullname : Fullname.toLowerCase()
 })
+await user.save();
 
  const createdUser = await User.findById(user._id).select(
     " -password ") //checking by _id that user is created or not
@@ -100,17 +102,11 @@ new ApiResponse(200, createdUser, "user registerd successfully")
 //   })(req, res, next);
 
 
-
-
 // });
-
-
-
-
 
  const loginUser = (req, res, next) => {
 
-const {username, password, email} = req.body;
+const {password, email} = req.body;
 
   passport.authenticate('local', (err, user, info) => {
     if (err) {

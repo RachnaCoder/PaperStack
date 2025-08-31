@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
-  const [form, setForm] = useState({ username: "", email: "", password: "" });
+  const [form, setForm] = useState({ Fullname: "", email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -12,17 +12,17 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Replace 'http://localhost:5000/api/auth/register' with your backend endpoint
-      await axios.post("http://localhost:5000/api/auth/register", form);
+      
+      await axios.post("http://localhost:8000/api/v1/users/register", form);
+
       navigate("/login");
     } catch (err) {
-      setError(err.response?.data?.error || "Registration failed");
+      setError("Registration failed");
     }
   };
 
-  
-  return(
 
+  return(
 
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-purple-200">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
@@ -67,11 +67,10 @@ export default function Register() {
           <button
             type="submit"
             className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition"
-          >
-            Register
+          >Register
           </button>
           <p className="text-center mt-4 text-gray-500">
-            Already have an account?{" "}
+            Already have an account?
             <a href="/login" className="text-blue-600 hover:underline">Login</a>
           </p>
         </form>

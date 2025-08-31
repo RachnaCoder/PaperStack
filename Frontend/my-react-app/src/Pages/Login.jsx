@@ -16,15 +16,15 @@ const handleChange=(e)=> setForm({...form, [e.target.name]:e.target.value})
  const handleSubmit= async (e)=>{
     e.preventDefault();
     try{
-        //replace with real backend endpoint
-        await axios.post("http://localhost:5000/api/auth/login", form)
+        
+        await axios.post("http://localhost:8000/api/v1/users/login", form)
         navigate("/Home")
 
     }
 catch(err){
-setError(err.response?.data?.error || "Registration failed");
+setError("Login  failed");
 }
- }
+ };
 
  return(
 

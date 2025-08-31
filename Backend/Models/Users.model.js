@@ -2,11 +2,9 @@ import mongoose from "mongoose";
 import plm from "passport-local-mongoose";
 
 const userSchema = new mongoose.Schema({
-
-    username : {
+    Fullname : {
      type: String,
      required: true,
-     unique: true
     },
 
     email:{
@@ -15,8 +13,6 @@ const userSchema = new mongoose.Schema({
      unique: true,
      lowercase:true
     },
-
-
     password:{
         type:String,
         required:[true, "password is required"]
@@ -28,9 +24,7 @@ const userSchema = new mongoose.Schema({
     }],
 
 }, {timestamps:true}
-
 )
-
-userSchema.plugin(plm);
+userSchema.plugin(plm, {usernameField: 'email'});
 
 export  const User = mongoose.model("User", userSchema)
