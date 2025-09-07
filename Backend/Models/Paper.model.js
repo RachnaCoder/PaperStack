@@ -1,33 +1,31 @@
-import mongoose from mongoose
+import mongoose from "mongoose"
 
 const paperSchema = new mongoose.Schema(
-{
-course:{
+{ 
+  Course:{
 type: String,
 required: true,
 },
 
-subject:{
+Subject:{
 type: String,
 required: true,
 },
 
-year:{
+Year:{
 type:Number,
 required: true
 },
 
-uploadedBy:{
+UploadedBy:{
 type: mongoose.Schema.Types.ObjectId,
 ref: 'User'
 },
 
-fileUrl: { 
+FileUrl: [{ 
     type: String, 
     required: true 
-  },
-
-}
-)
+  }],
+})
 
  export const Paper = mongoose.model("Paper", paperSchema)

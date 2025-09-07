@@ -13,10 +13,6 @@ const userSchema = new mongoose.Schema({
      unique: true,
      lowercase:true
     },
-    password:{
-        type:String,
-        required:[true, "password is required"]
-    },
 
     uploadedPapers: [{
         type : mongoose.Schema.Types.ObjectId,
@@ -27,4 +23,6 @@ const userSchema = new mongoose.Schema({
 )
 userSchema.plugin(plm, {usernameField: 'email'});
 
+
 export  const User = mongoose.model("User", userSchema)
+

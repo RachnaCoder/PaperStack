@@ -2,11 +2,8 @@ import express from "express"
 import cors from "cors"
 import cookieparser from "cookie-parser"
 import passport from "./Config/Passport.config.js";
-
 import expressSession from "express-session";
-
- 
-
+import {User} from "./Models/Users.model.js";
 
 const app = express();
 
@@ -27,22 +24,24 @@ app.use(
   expressSession({
     resave:false,
     saveUninitialized: false,
-    secret: 123476,
+    secret: process.env.SESSION_SECRET,
   }));
 
   app.use(passport.initialize());
   app.use(passport.session());
 
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+  
+
 // import routes
 import userRouter from "./Routes/User.routes.js"
-
 
 // routes declaration
 
 app.use("/api/v1/users", userRouter)   ///standard practice
-
-
-///   http://localhost:8000/api/v1/users/register
 
 
 
