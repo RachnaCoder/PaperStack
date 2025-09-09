@@ -11,8 +11,13 @@ destination:function (req, file,cb) {
    cb(null, path.join(__dirname,"../public/Uploads"));
 },
 
-filename: function(req, file, cb ){
-    cb(null, file.originalname)
+// filename: function(req, file, cb ){
+//     cb(null, file.originalname)
+// }
+
+filename: function(req, file, cb) {
+  const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+  cb(null, uniqueSuffix + '-' + file.originalname);
 }
 });
 
@@ -28,7 +33,6 @@ const fileFilter = (req, file, cb) => {
     cb(new Error('Only PDF or image files (JPG/PNG) are allowed!'), false);
   }
 };
-
 
  export const upload = multer({ storage, fileFilter });
 

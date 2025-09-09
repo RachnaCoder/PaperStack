@@ -5,7 +5,6 @@ import {Paper} from "../Models/Paper.model.js";
 import {uploadOnCloudinary} from "../Utils/Cloudinary.js";
 
 const Uploadpapers = async(req, res,next) => {
-
 try{
     const {Subject, Course, Year} = req.body;
 
@@ -18,14 +17,25 @@ try{
 const uploadedUrls = [];
 //upload each file to cloudinnarry and collect fileurls
 
+console.log(req.files);
  for(let file of req.files ){
+    try{
+    console.log("Uploading file:", file.path);
 const result = await uploadOnCloudinary(file.path);
 
-if(result && result.url)
+if(result && result.url){
+console.log("cloudinary file url :", result.url);
+
 uploadedUrls.push(result.url);
+
 }
-
-
+else {
+  console.log("Cloudinary upload failed for:", file.path);
+}
+    }
+ catch(err){
+console.error("error in uploading files :", file.path, err); }
+ }
 const paper =  new Paper({
 Course,
 Subject,
@@ -34,18 +44,13 @@ FileUrl: uploadedUrls,
 UploadedBy : req.user._id
 
 });
-
 await paper.save();
-
 res.status(201).json({message : "paper is uploaded successfully", urls : uploadedUrls});
 }
 catch(error){
 
     next(error);
 }
-
-
-
 
 
 

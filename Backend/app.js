@@ -25,6 +25,12 @@ app.use(
     resave:false,
     saveUninitialized: false,
     secret: process.env.SESSION_SECRET,
+
+    cookie: {
+    sameSite: 'lax', // 'None' if using HTTPS and cross-domain
+    secure: false,   // true if using HTTPS
+  }
+  
   }));
 
   app.use(passport.initialize());
