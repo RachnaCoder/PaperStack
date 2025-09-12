@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import logo2 from "../assets/logo2.png";
 
 export default function Register() {
   const [form, setForm] = useState({ Fullname: "", email: "", password: "" });
@@ -26,10 +27,13 @@ export default function Register() {
 
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-purple-200">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+
+        <img src={logo2} alt="Logo" className="h-15 w-15 block mx-auto" />
+        
         <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">Create Account</h2>
         <form  onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block mb-1 text-gray-700 font-semibold">Full Name</label>
+            <label className="block mb-1 text-gray-700 font-semibold">Full Name *</label>
             <input
               type="text"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
@@ -41,7 +45,7 @@ export default function Register() {
             />
           </div>
           <div className="mb-4">
-            <label className="block mb-1 text-gray-700 font-semibold">Email Address</label>
+            <label className="block mb-1 text-gray-700 font-semibold">Email Address *</label>
             <input
               type="email"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
@@ -53,7 +57,7 @@ export default function Register() {
             />
           </div>
           <div className="mb-6">
-            <label className="block mb-1 text-gray-700 font-semibold">Password</label>
+            <label className="block mb-1 text-gray-700 font-semibold">Password *</label>
             <input
               type="password"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 transition"

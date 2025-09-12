@@ -52,44 +52,24 @@ catch(error){
     next(error);
 }
 
-
-
-
-
-
-
-// try{
-// const {Subject, Course, Year} = req.body;
-
-// const paperLocalPath = await req.files?.FileUrl[0]?.path;
-
-// if(!paperLocalPath){
-//     res.status(400).json({message : "Paper is required"});
-// }
-
-// const paperpath = await uploadOnCloudinary(paperLocalPath)
-
-// if(!paperpath){
-//     res.status(400).json({message : "Paper is required"})
-// }
-// // const file  = req.file ? req.file.filename : null;
-// const paper =  new Paper({
-// Course,
-// Subject,
-// Year,
-// FileUrl: paperpath,
-// UploadedBy : req.user._id
-
-// });
-
-// await paper.save();
-
-// res.status(201).json({message :" paper uploaded successfully"});
-// }
-// catch(error){
-//     console.log("error :", error);
-//     next(error)
-// }
  };
+
+
+export const getpapers = async (req, res) =>{
+
+  try{ 
+const Papers = await Paper.find().populate("UploadedBy" , "Fullname");
+res.status(200).json({Papers});
+  }
+  catch(error){
+res.status(500).json({  message : "failed in fetching papers", error});
+  }
+
+};
+
+
+
+
+
 
 export default Uploadpapers

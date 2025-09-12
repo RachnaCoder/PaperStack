@@ -16,10 +16,10 @@ const  handleClick = () => {
     
 return(
     <nav className="w-full bg-gray-50 text-black shadow">
-      <div className="container mx-auto flex items-center justify-between py-3 px-4">
+      <div className="container mx-auto flex items-center bg-white justify-between py-3 px-4">
         <div className="flex items-center">
           <img src={logo2} alt="Logo" className="h-15 w-15 mr-2" />
-          <span className="text-xl font-semibold tracking-wide">COLLEGE PAPERS PORTAL</span>
+          <span className="text-xl font-semibold tracking-wide">PAPERSTACK</span>
         </div>
         <div>
           <button onClick={handleClick} className="mx-2 px-4 py-2 rounded border hover:bg-gray-300">Login</button>
