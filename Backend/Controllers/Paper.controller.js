@@ -69,7 +69,26 @@ res.status(500).json({  message : "failed in fetching papers", error});
 
 
 
+export const getpaperbyId = async(req, res) => {
+  
+    try{
+   const PaperId =  req.params.id;    
+  const paper = await Paper.findById(PaperId).populate("UploadedBy", "Fullname", );
+ console.log(paper);
 
+if(!paper){
+    res.status(404).json({ message :"paper not found"});
+}
+
+res.status(200).json({paper});
+    }
+catch(error){
+    console.log(error);
+    res.status(500).json({ message: "error fetching paper" , error});
+
+}
+
+};
 
 
 export default Uploadpapers

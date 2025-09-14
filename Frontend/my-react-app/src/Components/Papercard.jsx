@@ -1,10 +1,9 @@
 
-// import { HiOutlineBookOpen,  HiOutlineCalendar, HiOutlineUser, HiOutlineDownload, HiOutlineShare } from 'react-icons/hi';
-
-
 import React from "react";
+import {Link} from "react-router-dom";
 
 import { HiOutlineBookOpen,  HiOutlineCalendar, HiOutlineUser, HiOutlineDownload, HiOutlineShare } from 'react-icons/hi'; 
+
 
 export default function Papercard({ Paper }) {
   // Destructure paper object properties
@@ -30,6 +29,7 @@ export default function Papercard({ Paper }) {
 
     console.log("fetched papers are:", Paper);
   return (
+    <Link  to ={`/Papers/${Paper._id}`}>
     <div className="border rounded-lg shadow-md p-4 flex flex-col justify-between bg-white w-64 h-64 group hover:shadow-2xl   transition-all duration-300  backdrop-blur-sm   hover:-translate-y-1">
       
      <div classname="">
@@ -67,9 +67,8 @@ export default function Papercard({ Paper }) {
         </button>
       </div>
     </div>
-  //);
-//}
-
+  
+</Link>
     );
 
 

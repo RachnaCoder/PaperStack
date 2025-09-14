@@ -132,8 +132,8 @@ return(
         <input className="hidden"
         type ="file"
         name="FileUrl"
-         multiple
-         accept = "application/pdf, image/*"
+        multiple
+        accept = "application/pdf, image/*"
         id ="file-upload"
         onChange ={(e)=> setFileUrl(e.target.files)}
         required />

@@ -1,5 +1,7 @@
 import {v2 as cloudinary} from "cloudinary"
 import fs, { existsSync } from "fs"
+import path from "path";
+
 
     // Configuration
     cloudinary.config({ 
@@ -11,8 +13,16 @@ import fs, { existsSync } from "fs"
     const uploadOnCloudinary = async(localfilepath) => {
 try{ 
     if(!localfilepath) return null //upload the file on cloudinary
+
+const ext = path.extname(localfilepath).toLowerCase();
+
+let resource_type = "image";
+if(ext === ".pdf") {
+    resource_type = "raw";
+}
+
 const response = await cloudinary.uploader.upload(localfilepath, {
-    resource_type :"auto"
+    resource_type 
 });
 //file is uploaded successfully
     console.log("file is uploaded on cloudinary", response.url);
