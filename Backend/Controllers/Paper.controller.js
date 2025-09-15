@@ -1,8 +1,8 @@
-// import { asyncHandler } from "../Utils/AsyncHandler.js";
-// import { ApiError } from "../Utils/ApiError.js";
-// import { ApiResponse } from "../Utils/ApiResponse.js";
+
 import {Paper} from "../Models/Paper.model.js";
 import {uploadOnCloudinary} from "../Utils/Cloudinary.js";
+import path  from "path";
+import { convertImageToPdf } from "../Utils/Pdfconveter.js";
 
 const Uploadpapers = async(req, res,next) => {
 try{
@@ -13,15 +13,16 @@ try{
     if(!req.files || req.files.length === 0){
         return res.status(400).json({ message : "file upload is required"});
     }
+  console.log(req.files);
 
 const uploadedUrls = [];
-//upload each file to cloudinnarry and collect fileurls
+//upload each file to cloudinary and collect fileurls
 
-console.log(req.files);
- for(let file of req.files ){
-    try{
-    console.log("Uploading file:", file.path);
-const result = await uploadOnCloudinary(file.path);
+const ext = path.extname(req.files[0].path).toLowerCase();
+if(ext === ".pdf"){
+
+console.log("Uploading file:", req.files[0].path);
+const result = await uploadOnCloudinary(req.files[0].path);
 
 if(result && result.url){
 console.log("cloudinary file url :", result.url);
@@ -29,13 +30,49 @@ console.log("cloudinary file url :", result.url);
 uploadedUrls.push(result.url);
 
 }
-else {
-  console.log("Cloudinary upload failed for:", file.path);
 }
-    }
- catch(err){
-console.error("error in uploading files :", file.path, err); }
- }
+else{
+const outputPath = `./public/Uploads/${Date.now()}-merged.pdf`;
+const pdfFile  = await convertImageToPdf(req.files, outputPath);
+
+console.log("Uploading file:", pdfFile);
+const result = await uploadOnCloudinary(pdfFile);
+
+if(result && result.url){
+console.log("cloudinary file url :", result.url);
+
+uploadedUrls.push(result.url);
+
+}
+}
+
+//} 
+//catch(err){
+// console.error("error in uploading files :", err); 
+// }
+// 
+// }
+
+
+//  for(let file of req.files ){
+//     try{
+//     console.log("Uploading file:", file.path);
+// const result = await uploadOnCloudinary(file.path);
+
+// if(result && result.url){
+// console.log("cloudinary file url :", result.url);
+
+// uploadedUrls.push(result.url);
+
+// }
+// else {
+//   console.log("Cloudinary upload failed for:", file.path);
+// }
+//     }
+//  catch(err){
+// console.error("error in uploading files :", file.path, err); }
+//  }
+
 const paper =  new Paper({
 Course,
 Subject,

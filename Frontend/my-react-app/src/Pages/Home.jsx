@@ -59,8 +59,8 @@ return(
   </p>
 </div>
 
-<div className="p-6 mt-20">
-  <h2 className="text-3xl font-bold color-black  mt-20 mb-6">Available Papers</h2>
+<div className="p-6 mt-20 flex justify-content-center">
+  {/* <h2 className="text-3xl font-bold color-black  mt-20 mb-6">Available Papers</h2> */}
 <div className="flex  ml-30 flex-wrap gap-8">
   {Papers.length === 0 ? (
     <p className="">No available papers</p>

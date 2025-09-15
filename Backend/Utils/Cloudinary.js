@@ -14,15 +14,9 @@ import path from "path";
 try{ 
     if(!localfilepath) return null //upload the file on cloudinary
 
-const ext = path.extname(localfilepath).toLowerCase();
-
-let resource_type = "image";
-if(ext === ".pdf") {
-    resource_type = "raw";
-}
 
 const response = await cloudinary.uploader.upload(localfilepath, {
-    resource_type 
+    resource_type :"raw",
 });
 //file is uploaded successfully
     console.log("file is uploaded on cloudinary", response.url);
@@ -37,7 +31,11 @@ fs.unlinkSync(localfilepath) //remove the localy saved temporary file as the fil
 //   console.error("Cloudinary upload failed for:", file.path);
 // }
 catch (error) {
-    console.error("Cloudinary upload error:", error); // No unlinkSync here unless you want to "clean up" failed files too.
+    console.error("Cloudinary upload error:", error); 
+
+    if(fs.existsSync(localfilepath)){
+    fs.unlinkSync(localfilepath) //remove the localy saved temporary file as the file operation got  successful
+}
     return null;
   }
 
