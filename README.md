@@ -4,8 +4,9 @@ PaperStack is a website specifically for students seeking easy access to previou
 
 ## Demo
 
-![Home Page](./assets/homepage.png)
-![Upload Paper](./assets/upload.png)
+![Home Page](https://github.com/RachnaCoder/PaperStack/blob/5da04f33d2d116a0748e53d9d6d6742ae5c5fd52/Screenshot%202025-09-16%20194331.png)
+![Upload Paper](https://github.com/RachnaCoder/PaperStack/blob/5da04f33d2d116a0748e53d9d6d6742ae5c5fd52/Screenshot%202025-09-16%20194505.png)
+![Upload Paper](https://github.com/RachnaCoder/PaperStack/blob/5da04f33d2d116a0748e53d9d6d6742ae5c5fd52/Screenshot%202025-09-16%20194523.png)
 
 ## Features
 
