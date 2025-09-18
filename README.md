@@ -1,6 +1,6 @@
 # PaperStack
 
-PaperStack is a website specifically for students seeking easy access to previous year exam papers. It helps learners quickly find, download, and share papers by subject and course, empowering them to prepare better and succeed academically. Students can also contribute by uploading their own papers in PDF or image form, fostering a collaborative community that supports continuous learning and knowledge sharing.
+PaperStack is a website specifically for students seeking easy access to previous year exam papers. It helps learners quickly find, download, and share papers by subject and course, empowering them to prepare better and succeed academically. Students can also contribute by uploading their own papers in PDF or image form, creating a collaborative community that supports continuous learning and knowledge sharing.
 
 ## Images of the website
 
