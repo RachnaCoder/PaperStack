@@ -16,7 +16,7 @@ export default function Register() {
       
       await axios.post("http://localhost:8000/api/v1/users/register", form);
 
-      navigate("/login");
+      navigate("/");
     } catch (err) {
       setError("Registration failed");
     }

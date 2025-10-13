@@ -10,15 +10,7 @@ import axios from "axios";
 export default function Home(){
 
     const [Showform, setShowform] = useState(false);
-//     const [Courses, setCourses] = useState([])
 
-//     useEffect(() => { //jab component load ho jaye tab course data fetch karo
-//     fetch("http://localhost:5000/api/courses")
-//       .then(res => res.json())
-//       .then(data => {
-//         setCourses(data); // backend se array ka data set karo
-//       });
-//   }, []);
   const [Papers, setPapers] = useState([]);
   const[Loading, setisLoading] = useState(true);
 
@@ -51,17 +43,17 @@ return(
 {/* <div className="min-h-screen  bg-gradient-to-r from-blue-200 to-purple-200"> */}
 
 <div className=" text-center top-50 bottom-0 left-0 right-0 mt-10 mb-12">
-  <h1 className="text-4xl font-extrabold tracking-tight text-center text-black-700">
+  <h1 className="text-2xl font-bold sm:text-4xl md:text-5xl font-extrabold tracking-tight text-center text-black-700">
     Welcome to PaperStack
   </h1>
-  <p className="mt-4 text-2xl text-center text-black-600">
+  <p className="mt-4 text-xl sm:text-2xl md:text-3xl text-center text-black-600">
     Your gateway to previous year papers and smarter exam prep.
   </p>
 </div>
 
-<div className="p-6 mt-20 flex justify-content-center">
+<div className="p-6 mt-20  flex justify-content-center flex-col sm:flex-row">
   {/* <h2 className="text-3xl font-bold color-black  mt-20 mb-6">Available Papers</h2> */}
-<div className="flex  ml-30 flex-wrap gap-8">
+<div className="ml-8 sm:ml-30 md:ml-40 flex-wrap gap-8 flex justify-center sm:justify-start">
   {Papers.length === 0 ? (
     <p className="">No available papers</p>
   ) : (Papers.map((Paper) =>(

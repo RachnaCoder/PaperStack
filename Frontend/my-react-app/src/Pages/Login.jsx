@@ -17,7 +17,7 @@ const handleChange=(e)=> setForm({...form, [e.target.name]:e.target.value})
     e.preventDefault();
     try{
         await axios.post("http://localhost:8000/api/v1/users/login", form ,  { withCredentials: true });
-        navigate("/Home")
+        navigate("/")
 
     }
 catch(err){

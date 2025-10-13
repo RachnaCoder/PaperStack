@@ -9,6 +9,7 @@ export default function Papercard({ Paper }) {
   // Destructure paper object properties
   const {Subject, Course, Year, UploadedBy, FileUrl } = Paper;
 
+
   // Handler for download button
   const handleDownload = () => {
     // Open file URL in new tab to allow download or viewing
@@ -30,7 +31,7 @@ export default function Papercard({ Paper }) {
     console.log("fetched papers are:", Paper);
   return (
     <Link  to ={`/Papers/${Paper._id}`}>
-    <div className="border rounded-lg shadow-md p-4 flex flex-col justify-between bg-white w-64 h-64 group hover:shadow-2xl   transition-all duration-300  backdrop-blur-sm   hover:-translate-y-1">
+    <div className="border rounded-lg shadow-md p-4 flex flex-col justify-between bg-white w-54 h-54  sm:w-64 h-64  md:w-64 h-64 group hover:shadow-2xl   transition-all duration-300  backdrop-blur-sm   hover:-translate-y-1">
       
      <div classname="">
       <h1 className="font-bold color-black-600 text-2xl">{Subject}</h1>
