@@ -1,7 +1,6 @@
 import react, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar.jsx";
-import { useNavigate } from 'react-router-dom';
-//import Sidebar from "../Components/Sidebar.jsx";
+import Searchbar from "../Components/Searchbar.jsx";
 import Paperupload from "../Components/Paperupload.jsx";
 import axios from "axios";
 
@@ -13,6 +12,11 @@ export default function Home(){
 
   const [Papers, setPapers] = useState([]);
   const[Loading, setisLoading] = useState(true);
+const[searchInput, setSearchinput] = useState('');
+
+const filteredpapers = Papers.filter(Paper =>
+    Paper.Subject.toLowerCase().includes(searchInput.toLowerCase())
+);
 
 useEffect(() =>{
   //fetching data from the backend API 
@@ -42,7 +46,7 @@ return(
 
 {/* <div className="min-h-screen  bg-gradient-to-r from-blue-200 to-purple-200"> */}
 
-<div className=" text-center top-50 bottom-0 left-0 right-0 mt-10 mb-12">
+<div className="text-center top-50 bottom-0 left-0 right-0 mt-10 mb-12">
   <h1 className="text-2xl font-bold sm:text-4xl md:text-5xl font-extrabold tracking-tight text-center text-black-700">
     Welcome to PaperStack
   </h1>
@@ -51,28 +55,24 @@ return(
   </p>
 </div>
 
+<div>
+<Searchbar searchInput={searchInput} setSearchinput={setSearchinput}/>
+</div>
+
+
 <div className="p-6 mt-20  flex justify-content-center flex-col sm:flex-row">
   {/* <h2 className="text-3xl font-bold color-black  mt-20 mb-6">Available Papers</h2> */}
 <div className="ml-8 sm:ml-30 md:ml-40 flex-wrap gap-8 flex justify-center sm:justify-start">
-  {Papers.length === 0 ? (
+  {filteredpapers.length === 0 ? (
     <p className="">No available papers</p>
-  ) : (Papers.map((Paper) =>(
+  ) : (filteredpapers.map((Paper) =>(
     <Papercard key={Paper._id} Paper={Paper}/>
   ))
 
   )} 
 </div>
 
-
 </div>
-
-
-
-
-
-
-
-
 
 </div>
 

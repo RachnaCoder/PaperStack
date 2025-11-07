@@ -1,5 +1,4 @@
 
-import React from "react";
 import {Link} from "react-router-dom";
 
 import { HiOutlineBookOpen,  HiOutlineCalendar, HiOutlineUser, HiOutlineDownload, HiOutlineShare } from 'react-icons/hi'; 

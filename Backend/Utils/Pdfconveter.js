@@ -16,10 +16,11 @@ files.forEach(file => {
 
   doc.image(file.path, {
       fit: [595, 842],  // A4 page dimensions in points (width x height)
-      align: 'center',
-      valign: 'center'
+      
     });
+  
 });
+
 
 doc.end();
 

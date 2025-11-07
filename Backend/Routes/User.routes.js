@@ -17,7 +17,7 @@ router.post("/Papers", isAuthenticated, upload.array("FileUrl", 5), Uploadpapers
 
 router.get("/Papers", getpapers)
 
-router.get("/Papers/:id",  getpaperbyId )
+router.get("/Papers/:id", getpaperbyId )
 
 export default router
 

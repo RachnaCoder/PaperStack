@@ -4,8 +4,8 @@ function isAuthenticated(req, res, next){
 if(req.isAuthenticated()){
   return next();
 }
-res.status(401).json({message : "unauthorized user"});
 
+res.status(401).json({message : "unauthorized user"});
   }
 
   export default isAuthenticated
