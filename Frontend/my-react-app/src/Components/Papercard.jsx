@@ -16,11 +16,15 @@ export default function Papercard({ Paper }) {
   };
 
   // Handler for share button (example: share paper URL)
-  const handleShare = () => {
+  
+
+  const handleShare = (Paper) => {
+
     if (navigator.share) {
       navigator.share({
-        title: title || "Paper",
-        url: FileUrl[0] || window.location.href
+        title: Paper.Subject,
+        text: `Check out this paper ${Paper.Subject}`,
+        url: Paper.FileUrl[0]
       });
     } else {
       alert("Share not supported");
@@ -60,7 +64,7 @@ export default function Papercard({ Paper }) {
         <button
         variant ="outline"
         size ="sm"
-          onClick={handleShare}
+          onClick={()=> handleShare(Paper)}
           className=" border text-black px-3 py-1 rounded hover:bg-gray-300"
         >
           <HiOutlineShare ></HiOutlineShare>

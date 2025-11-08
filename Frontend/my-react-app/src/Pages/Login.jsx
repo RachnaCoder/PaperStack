@@ -26,7 +26,7 @@ setError("Login  failed");
  };
  return(
 <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-purple-200">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm  mx-4 px-4 ">
 
                   <img src={logo2} alt="Logo" className="h-15 w-15 block mx-auto" />
         

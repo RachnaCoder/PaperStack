@@ -15,7 +15,9 @@ export default function Home(){
 const[searchInput, setSearchinput] = useState('');
 
 const filteredpapers = Papers.filter(Paper =>
-    Paper.Subject.toLowerCase().includes(searchInput.toLowerCase())
+    Paper.Subject.toLowerCase().includes(searchInput.toLowerCase())||
+     Paper.Course.toLowerCase().includes(searchInput.toLowerCase()) ||
+      Paper.Year.toString().includes(searchInput)
 );
 
 useEffect(() =>{

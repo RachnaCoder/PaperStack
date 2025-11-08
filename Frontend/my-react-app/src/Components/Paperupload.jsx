@@ -50,7 +50,7 @@ onClose();
 return(
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
         
-        <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+        <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm mx-8 px-5 ">
             <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">UPLOAD PAPER</h2>
             <div className="mb-4">
         <label className="block mb-1 text-gray-700 font-semibold">Subject Name *</label>
