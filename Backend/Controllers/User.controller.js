@@ -17,23 +17,58 @@ import passport from "../Config/Passport.config.js";
 ///////// REGISTERING THE USER//////////////////
 
 
+// const registerUser = async (req, res, next) => {
+//   try {
+//     const { Fullname, email, password } = req.body;
+//     const newUser = new User({ Fullname, email });
+
+//     User.register(newUser, password, (err, user) => {
+//       if (err) {
+//         console.log("registration error", err);
+//         return res.status(400).json({ message: err.message });
+//       }
+//       // User registered successfully
+//       res.status(201).json({ message: "User registered", userId: user._id });
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
 const registerUser = async (req, res, next) => {
   try {
     const { Fullname, email, password } = req.body;
+    
+    // Create new user instance
     const newUser = new User({ Fullname, email });
-
+    
+    // Register user with passport-local-mongoose
     User.register(newUser, password, (err, user) => {
       if (err) {
         console.log("registration error", err);
-        return res.status(400).json({ message: err.message });
+        return res.status(400).json({ 
+          success: false,
+          message: err.message 
+        });
       }
+      
       // User registered successfully
-      res.status(201).json({ message: "User registered", userId: user._id });
+      return res.status(201).json({ 
+        success: true,
+        message: "User registered successfully", 
+        userId: user._id 
+      });
     });
+    
   } catch (error) {
-    next(error);
+    console.error("Registration error:", error);
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    });
   }
 };
+
 
 ///////////LOGIN USER CONTROLLER//////////////////
 // get user details from the frontend -- req.body

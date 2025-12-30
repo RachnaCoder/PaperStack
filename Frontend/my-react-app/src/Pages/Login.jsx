@@ -21,7 +21,7 @@ const handleChange=(e)=> setForm({...form, [e.target.name]:e.target.value})
 
     }
 catch(err){
-setError("Login  failed");
+setError("Login failed");
 }
  };
  return(

@@ -10,17 +10,40 @@ export default function Register() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
       
-      await axios.post("http://localhost:8000/api/v1/users/register", form);
+  //     await axios.post("http://localhost:8000/api/v1/users/register", form,
+  //       { withCredentials: true }
+  //     );
 
-      navigate("/");
-    } catch (err) {
-      setError("Registration failed");
-    }
-  };
+  //         navigate("/");
+
+  //   }
+    
+  //   catch (err) {
+  //     setError("Registration failed");
+  //   }
+  // };
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post(
+      "http://localhost:8000/api/v1/users/register", 
+      form,
+      { withCredentials: true }  // Add this!
+    );
+    
+    console.log("Registration success:", response.data);
+    navigate("/");
+    
+  } catch (err) {
+    console.error("Registration error:", err.response?.data);
+    setError(err.response?.data?.message || "Registration failed");
+  }
+};
 
 
   return(
