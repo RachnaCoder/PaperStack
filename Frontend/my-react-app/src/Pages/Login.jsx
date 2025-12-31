@@ -15,15 +15,36 @@ const handleChange=(e)=> setForm({...form, [e.target.name]:e.target.value})
 
  const handleSubmit= async (e)=>{
     e.preventDefault();
+     setError("");
+
+
+    if(!form.email || !form.password){
+      setError("Please fill all fields");
+      return;
+    }
+
     try{
         await axios.post("http://localhost:8000/api/v1/users/login", form ,  { withCredentials: true });
         navigate("/")
 
     }
 catch(err){
-setError("Login failed");
-}
- };
+
+  // Handle different error types
+      if (err.response?.status === 401) {
+        setError("Invalid email or password");
+      } else if (err.response?.status === 404) {
+        setError("No account found with this email");
+      } else if (err.response?.data?.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("Login failed. Please try again.");
+      }
+      
+      console.error("Login error:", err);
+    }
+  };
+
  return(
 <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-purple-200">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm  mx-4 px-4 ">
@@ -57,12 +78,23 @@ setError("Login failed");
               onChange={handleChange}
             />
           </div>
+
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">
+              {error}
+            </div>
+          )}
+
           <button
             type="submit"
             className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition"
           >
             Login
           </button>
+          <p className="text-center mt-4 text-gray-500">
+            Don't have an account?
+            <a href="/register" className="text-blue-600 hover:underline">Register</a>
+          </p>
           
         </form>
       </div>

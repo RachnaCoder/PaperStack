@@ -1,7 +1,7 @@
 
 import {User} from "../Models/Users.model.js";
 import passport from "../Config/Passport.config.js";
-
+import mongoose from "mongoose";
   
 //////STEPS FOR REGISTERING THE USER TO KEEP IN MIND ////////
 
@@ -38,7 +38,18 @@ import passport from "../Config/Passport.config.js";
 const registerUser = async (req, res, next) => {
   try {
     const { Fullname, email, password } = req.body;
+
+   console.log("User model collection name:", User.collection.collectionName);
+    console.log("Database name:", mongoose.connection.db.databaseName);
     
+
+    const existingUser = await User.findOne({email: email});
+    if(existingUser){
+      return res.status(400).json({
+        success: false,
+        message: "User already exists"
+      });
+    }
     // Create new user instance
     const newUser = new User({ Fullname, email });
     

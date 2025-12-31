@@ -10,38 +10,37 @@ export default function Register() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-      
-  //     await axios.post("http://localhost:8000/api/v1/users/register", form,
-  //       { withCredentials: true }
-  //     );
-
-  //         navigate("/");
-
-  //   }
-    
-  //   catch (err) {
-  //     setError("Registration failed");
-  //   }
-  // };
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+  setError("");
+
+  if(!form.Fullname || !form.email || !form.password){
+    setError("Please fill in all fields");
+    return;
+  }
+
+  if(form.password.length < 6){
+    setError("Password must be atleast of 6 characters");
+    return;
+  }
+
   try {
     const response = await axios.post(
       "http://localhost:8000/api/v1/users/register", 
       form,
-      { withCredentials: true }  // Add this!
+      { withCredentials: true } 
     );
     
     console.log("Registration success:", response.data);
     navigate("/");
     
   } catch (err) {
+    const errormessage = err.response?.data?.message || "Registration failed ! Please try again.";
+    setError(errormessage);
     console.error("Registration error:", err.response?.data);
-    setError(err.response?.data?.message || "Registration failed");
+
+
   }
 };
 
@@ -91,6 +90,21 @@ const handleSubmit = async (e) => {
               onChange={handleChange}
             />
           </div>
+
+          {error && (
+           <div style={{
+            backgroundColor: '#fee2e2',
+            color: '#dc2626',
+            padding: '12px',
+            borderRadius: '8px',
+            marginBottom: '16px',
+            fontSize: '14px',
+            textAlign: 'center'
+             }}>
+            {error}
+            </div>
+             )}
+
           <button
             type="submit"
             className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition"
