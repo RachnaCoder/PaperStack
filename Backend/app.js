@@ -6,7 +6,6 @@ import expressSession from "express-session";
 import {User} from "./Models/Users.model.js";
 
 const app = express();
-
 app.use(cors({
   origin: process.env.CORS_ORIGIN,
   credentials: true  
@@ -30,7 +29,6 @@ app.use(
     sameSite: 'lax', // 'None' if using HTTPS and cross-domain
     secure: false,   // true if using HTTPS
   }
-  
   }));
 
   app.use(passport.initialize());
@@ -40,16 +38,12 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-  
-
 // import routes
 import userRouter from "./Routes/User.routes.js"
 
 // routes declaration
 
 app.use("/api/v1/users", userRouter)   ///standard practice
-
-
 
 export default app;
 
