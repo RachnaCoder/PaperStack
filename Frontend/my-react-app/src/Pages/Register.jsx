@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import logo2 from "../assets/logo2.png";
+import { API_BASE } from "../api";
 
 export default function Register() {
   const [form, setForm] = useState({ Fullname: "", email: "", password: "" });
@@ -27,7 +28,7 @@ const handleSubmit = async (e) => {
 
   try {
     const response = await axios.post(
-      "http://localhost:8000/api/v1/users/register", 
+      `${API_BASE}/api/v1/users/register`, 
       form,
       { withCredentials: true } 
     );

@@ -3,6 +3,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 
 import { useParams } from "react-router-dom"
+import { API_BASE } from "../api";
 
 function Paperdetail() {
 const { id } = useParams();
@@ -11,7 +12,7 @@ const[ paper, setpaper] = useState(null)
 
 useEffect(()=> {
     async function fetchpapers (){
-        const res = await axios.get(`http://localhost:8000/api/v1/users/Papers/${id}`);
+        const res = await axios.get(`${API_BASE}/api/v1/users/Papers/${id}`);
         setpaper(res.data.paper);
          
     }
@@ -41,9 +42,6 @@ return(
 </a>
 
 </div> 
-
-
-    
 //  <div key={idx} className="flex justify-center items-center  bg-gray-700 min-h-screen ">
 
 //  {url.endsWith(".pdf") ? ( <embed  src={url}  type="application/pdf" className="w-1500  h-1000 " />  
@@ -63,9 +61,7 @@ return(
 )}
 
 </div>
-
 )
-
 }
 
 export default Paperdetail

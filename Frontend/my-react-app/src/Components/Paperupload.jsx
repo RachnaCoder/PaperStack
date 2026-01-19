@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState} from "react";
+import { API_BASE } from "../api";
 
  export default function Paperupload({onClose}){
 const [Subject, setSubject] = useState([]);
@@ -29,7 +30,7 @@ formData.append("FileUrl", FileUrl );
 
 // backend ke pas request bhejhna 
 
-const res = await axios.post("http://localhost:8000/api/v1/users/papers", formData, 
+const res = await axios.post(`${API_BASE}/api/v1/users/papers`, formData, 
     {
       headers : {
       "Content-Type": "multipart/form-data"

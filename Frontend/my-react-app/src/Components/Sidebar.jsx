@@ -1,7 +1,4 @@
 import react from "react";
-//import axios from "axios";
-
-
 
 function Sidebar({ Courses, onSelectCourse }) {
   return (

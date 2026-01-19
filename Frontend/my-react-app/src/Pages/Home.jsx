@@ -3,10 +3,11 @@ import Navbar from "../Components/Navbar.jsx";
 import Searchbar from "../Components/Searchbar.jsx";
 import Paperupload from "../Components/Paperupload.jsx";
 import axios from "axios";
+import { API_BASE } from "../api.js";
 
  import Papercard from "../Components/Papercard.jsx";
 
-export default function Home(){
+ export default function Home(){
 
     const [Showform, setShowform] = useState(false);
 
@@ -24,7 +25,7 @@ useEffect(() =>{
   //fetching data from the backend API 
   const fetchPapers = async ()=>{
     try{
-const res = await axios.get("http://localhost:8000/api/v1/users/Papers");
+const res = await axios.get(`${API_BASE}/api/v1/users/Papers`);
 setPapers(res.data.Papers || []);
     }
   catch(err){

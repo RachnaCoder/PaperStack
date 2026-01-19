@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import logo2 from "../assets/logo2.png";
+import { API_BASE } from "../api";
 
 export default function Login(){
 
@@ -24,7 +25,7 @@ const handleChange=(e)=> setForm({...form, [e.target.name]:e.target.value})
     }
 
     try{
-        await axios.post("http://localhost:8000/api/v1/users/login", form ,  { withCredentials: true });
+        await axios.post(`${API_BASE}/api/v1/users/login`, form ,  { withCredentials: true });
         navigate("/")
 
     }
